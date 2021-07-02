@@ -53,9 +53,25 @@ class PolyTreeNode
         self.children.each do |child|
             rec = child.dfs(target_value) 
             if rec != nil
-                return wreck
+                return rec
             end
         end
         nil
+    end
+
+    def bfs(target_value)
+        queue = []
+        queue.push(self)
+        while !queue.empty?
+            node = queue.shift 
+            if node.value == target_value
+                return node
+            else
+                node.children.each do |child|
+                    queue << child
+                end
+            end
+        end
+        nil 
     end
 end
