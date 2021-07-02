@@ -1,3 +1,4 @@
+require "byebug"
 class PolyTreeNode
     def initialize(value)
         @parent = nil
@@ -19,7 +20,8 @@ class PolyTreeNode
 
     def parent=(node) #node is the new parent
         @parent = node
+        # debugger
         #we want to add children(grand children) to the new parent(node)
-        @children.each |do|
+        @parent.children << self
     end
 end
