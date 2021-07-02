@@ -34,4 +34,29 @@ class PolyTreeNode
         #set self parrent to new parent
         #set self as a new child as new parent unless i already exist in that parents child array
     end
+
+    def add_child(child_node)
+        if !self.children.include?(child_node)
+            child_node.parent = self
+        end 
+    end
+
+    def remove_child(child_node)
+        raise "error" if !self.children.include?(child_node)
+        child_node.parent = nil
+    end
+
+    def dfs(target_value)
+         if target_value == self.value
+            return self 
+         else
+            self.children.each do |child|
+            # child is a node instance 
+                if  child.dfs(target_value) != nil  
+                    return child.dfs(target_value)
+                end
+            end
+        end
+
+    end
 end
