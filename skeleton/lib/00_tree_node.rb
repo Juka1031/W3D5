@@ -1,7 +1,7 @@
 require "byebug"
 class PolyTreeNode
     def initialize(value)
-        @parent = nil
+        @parent = nil #if parent is nil it means its root
         @children = []
         @value = value
     end
@@ -17,11 +17,21 @@ class PolyTreeNode
     def value
         @value
     end
+    def parent=(new_parent)
+        if @parent != nil
+            @parent.children.delete(self)
+        end
+        @parent = new_parent
 
-    def parent=(node) #node is the new parent
-        @parent = node
-        # debugger
-        #we want to add children(grand children) to the new parent(node)
-        @parent.children << self
+        if @parent != nil
+            if !@parent.children.include?(self)
+                @parent.children << self
+            end
+        end
+        #it checks if parent == np
+        #if it is just return
+        #detach self from current parent
+        #set self parrent to new parent
+        #set self as a new child as new parent unless i already exist in that parents child array
     end
 end
